@@ -6,8 +6,12 @@ from watchdog.events import FileSystemEventHandler
 # moduleのimport
 from module.postProcessing import PostProcessing
 # Path: module/directoryMonitoring.py
+from module.directoryMonitoring import watch_directory
 
 # ディレクトリ監視関数の追加
+directory_to_watch = "/GitHub/kadai11/img/upload"  # 監視対象ディレクトリのパスを指定
+post_processor = PostProcessing()
+watch_directory(directory_to_watch, post_processor)
 # ここに書く
 
 
