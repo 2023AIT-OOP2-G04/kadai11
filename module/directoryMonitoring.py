@@ -6,7 +6,7 @@ import os
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from module.postProcessing import PostProcessing
+from postProcessing import PostProcessing
 
 class ImageProcessingHandler(FileSystemEventHandler):
     def __init__(self, post_processor):
@@ -38,6 +38,6 @@ def watch_directory(directory_path, post_processor):
 
 if __name__ == "__main__":
     # ディレクトリ監視関数の追加
-    directory_to_watch = "/GitHub/kadai11/img/upload"  # 監視対象ディレクトリのパスを指定
+    directory_to_watch = "./kadai11/static/img/uplode"  # 監視対象ディレクトリのパスを指定
     post_processor = PostProcessing()
     watch_directory(directory_to_watch, post_processor)
