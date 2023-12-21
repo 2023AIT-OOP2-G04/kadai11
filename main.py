@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, jsonify
 import os
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+import glob
 
 # moduleのimport
 from module.postProcessing import PostProcessing
@@ -24,7 +25,22 @@ def upload_file():
 @app.route('/show', methods=['GET'])
 def show():
     # uploadフォルダとprocessedフォルダの画像を表示
-    return render_template("show.html")
+    uploadPath = "static/upload"
+    uploadFiles = [
+        f for f in os.listdir(uploadPath) if os.path.isfile(os.path.join(uploadPath, f))
+    ] 
+    print(uploadFiles)
+
+    processedPath = "static/processed"
+    processedFiles = [
+        f for f in os.listdir(processedPath) if os.path.isfile(os.path.join(processedPath, f))
+    ] 
+    print(processedFiles)
+
+
+    return render_template("show.html",
+                           uploadFiles,
+                           processedFiles)
 
 # http://127.0.0.1:5000/
 @app.route('/')

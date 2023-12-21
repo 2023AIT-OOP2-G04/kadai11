@@ -14,9 +14,24 @@
 </head>
 
 <body>
-    <h1>
-        中身は空です
-    </h1>
+    <main>
+        <section>
+            <figure>
+                <h1>
+                    アップロード画像
+                </h1>
+                <ul>
+                    <img src="{{ url_for('static', filename='/upload/before.jpg') }}" alt="before" width="200">
+                </ul>
+                <h1>
+                    処理後の画像
+                </h1>
+                <ul>
+                    <img src="{{ url_for('static', filename='/processed/after.jpg') }}" alt="before" width="200">
+                </ul>
+            </figure>
+        </section>
+    </main>
 </body>
 
 </html>
