@@ -1,15 +1,16 @@
+
 import cv2
 from flask import app
 import numpy as np
 import os
 
 class PostProcessing:
-    def __init__(self, imagePath: str = ""):
+    def __init__(self, imagePath: str=""):
         if imagePath == "":
             self.image = None
         else:
             self.image = cv2.imread(imagePath)
-        self.funcList = [self.__sampleFunc, self.facewaku, self.faceMosaic,self.cannyFilter]  # 画像処理の関数を格納するリスト
+        self.funcList = [self.__sampleFunc, self.facewaku, self.faceMosaic,self.cannyFilter,self.__binaryThreshold]  # 画像処理の関数を格納するリスト
     # 画像処理の関数を追加する
     def cannyFilter(self):
         # グレースケール変換
@@ -25,18 +26,21 @@ class PostProcessing:
         # 出力画像の保存
         self.writeImage(edges, "output")
 
-    # サンプル関数
-    def __sampleFunc(self):
-        print("sampleFunc、ファンクリストから呼び出されました。")
+    # グレースケールに変換する関数
+    def __convertToGrayscale(self):
+        if self.image is not None:
+            return cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+        return None
 
-    def run(self):
-        for func in self.funcList:
-            image = func()
-            self.writeImage(image)
-        return
+    # 2値化する関数
+    def __binaryThreshold(self):
+        gray_image = self.__convertToGrayscale()
+        if gray_image is not None:
+            _, binary_image = cv2.threshold(gray_image, 128, 255, cv2.THRESH_BINARY)
+            return binary_image
+        return None
 
-    # ここに画像処理の関数を書く
-    # 顔検出して枠で囲う関数
+        # 顔検出して枠で囲う関数
     def facewaku(self):
         if self.image is None:
             return
@@ -86,7 +90,20 @@ class PostProcessing:
         #出力
         self.writeImage(self.image,"mosaic")
 
-    def readImage(self, imagePath: str = ""):
+    # サンプル関数
+    def __sampleFunc(self):
+        print("sampleFunc、ファンクリストから呼び出されました.")
+
+    
+
+    def run(self):
+        for func in self.funcList:
+            image = func()
+            self.writeImage(image, func.__name__)
+        return 
+
+
+    def readImage(self, imagePath: str=""):
         if imagePath == "":
             return
         self.image = cv2.imread(imagePath)
@@ -109,7 +126,7 @@ class PostProcessing:
 
 if __name__ == "__main__":
     # ここでデバッグする
-
     # 以下のようにデバッグする
     imagePath = "./static/img/test/test.jpg"
     postProcessing = PostProcessing(imagePath)
+
