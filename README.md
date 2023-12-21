@@ -105,13 +105,13 @@ pythonで必要なライブラリをインストールすれば大丈夫です�
 
 | 番号  | 概要  | 担当者 | 使用言語 | 実装の流れ | デバッグ方法 |
 | --- | --- | --- | --- | --- | --- |
-| 1   | ファイルアップロードインターフェイス |     | python,html,css,js | 画像をアップロードするwebページ + flaskでのファイル保存処理を書いてもらいます。  <br>webページはtemplatesフォルダ内のindex.html、staticフォルダ内のupload.jsを編集してください。  <br>サーバ側の挙動はmain.py内の `def upload_file()` 関数に処理を追加してください。 | main.pyを実行してデバッグをしてください。 |
-| 2   | アップロード画像と画像処理済み画像の閲覧 |     | python,html,css,js | アップロード画像と画像処理済み画像の閲覧ができるwebページ + flaskで表示する画像の取得する処理を書いてもらいます。  <br>webページはtemplatesフォルダ内のshow.html、staticフォルダ内のshow.jsを編集してください。  <br>サーバ側の挙動はmain.py内の `def show()` 関数に処理を追加してください。 | main.pyを実行してデバッグをしてください。 |
-| 3   | ディレクトリ監視から各画像処理呼び出しをするプログラム |     | python | pythonでwatchdogを用いてディレクトリを監視して、ファイルが追加される度に各画像処理を呼び出す処理を書いてもらいます。  <br>moduleフォルダ内のdirectoryMonitoring.pyに処理を追加して、main.py内の「ディレクトリ監視関数の追加」というコメントの下に監視を始める処理を追加してください。  <br>各画像処理の呼び出しに関しては、PostProcessingクラスを参照してください。 | directoryMonitoring.pyを実行してデバッグをしてください。 |
-| 4   | 顔検出してモザイク |     | python | pythonでopenCVを用いて顔検出してモザイクをかける処理を書いてもらいます。  <br>moduleフォルダ内のpostProcessing.pyに書かれているPostProcessingクラス内に関数を追加して処理を書いてください。また、出力する画像はprocessedフォルダに格納されるようにしてください。  <br>作成した関数については`self.funcList` に登録しておいてください。 | postProcessing.pyを実行してデバッグをしてください。 |
-| 5   | 顔検出して枠で囲う |     | python | pythonでopenCVを用いて顔検出して枠で囲う処理を書いてもらいます。  <br>基本的な流れは4番と同様です。 | postProcessing.pyを実行してデバッグをしてください。 |
-| 6   | Cannyフィルタによる輪郭抽出 |     | python | pythonでopenCVを用いてCannyフィルタによる輪郭抽出をする処理を書いてもらいます。  <br>基本的な流れは4番と同様です。 | postProcessing.pyを実行してデバッグをしてください。 |
-| 7   | 画像のグレースケール化 (できれば2値化も) |     | python | pythonでopenCVを用いて画像のグレースケール化 (できれば2値化も)をする処理を書いてもらいます。  <br>基本的な流れは4番と同様です。 | postProcessing.pyを実行してデバッグをしてください。 |
+| 1   | ファイルアップロードインターフェイス |   x22037 纐纈  | python,html,css,js | 画像をアップロードするwebページ + flaskでのファイル保存処理を書いてもらいます。  <br>webページはtemplatesフォルダ内のindex.html、staticフォルダ内のupload.jsを編集してください。  <br>サーバ側の挙動はmain.py内の `def upload_file()` 関数に処理を追加してください。 | main.pyを実行してデバッグをしてください。 |
+| 2   | アップロード画像と画像処理済み画像の閲覧 |  k22008 石川   | python,html,css,js | アップロード画像と画像処理済み画像の閲覧ができるwebページ + flaskで表示する画像の取得する処理を書いてもらいます。  <br>webページはtemplatesフォルダ内のshow.html、staticフォルダ内のshow.jsを編集してください。  <br>サーバ側の挙動はmain.py内の `def show()` 関数に処理を追加してください。 | main.pyを実行してデバッグをしてください。 |
+| 3   | ディレクトリ監視から各画像処理呼び出しをするプログラム |  k22025 大久保   | python | pythonでwatchdogを用いてディレクトリを監視して、ファイルが追加される度に各画像処理を呼び出す処理を書いてもらいます。  <br>moduleフォルダ内のdirectoryMonitoring.pyに処理を追加して、main.py内の「ディレクトリ監視関数の追加」というコメントの下に監視を始める処理を追加してください。  <br>各画像処理の呼び出しに関しては、PostProcessingクラスを参照してください。 | directoryMonitoring.pyを実行してデバッグをしてください。 |
+| 4   | 顔検出してモザイク |   k22068 宿野  | python | pythonでopenCVを用いて顔検出してモザイクをかける処理を書いてもらいます。  <br>moduleフォルダ内のpostProcessing.pyに書かれているPostProcessingクラス内に関数を追加して処理を書いてください。また、出力する画像はprocessedフォルダに格納されるようにしてください。  <br>作成した関数については`self.funcList` に登録しておいてください。 | postProcessing.pyを実行してデバッグをしてください。 |
+| 5   | 顔検出して枠で囲う |   k22136 森  | python | pythonでopenCVを用いて顔検出して枠で囲う処理を書いてもらいます。  <br>基本的な流れは4番と同様です。 | postProcessing.pyを実行してデバッグをしてください。 |
+| 6   | Cannyフィルタによる輪郭抽出 |  k22052 小林   | python | pythonでopenCVを用いてCannyフィルタによる輪郭抽出をする処理を書いてもらいます。  <br>基本的な流れは4番と同様です。 | postProcessing.pyを実行してデバッグをしてください。 |
+| 7   | 画像のグレースケール化 (できれば2値化も) |   k20114 森田  | python | pythonでopenCVを用いて画像のグレースケール化 (できれば2値化も)をする処理を書いてもらいます。  <br>基本的な流れは4番と同様です。 | postProcessing.pyを実行してデバッグをしてください。 |
 
 </details>
 
@@ -205,3 +205,4 @@ LINEだと情報がカテゴリー分けできないのでこちらを採用し�
 こんだけチャンネルの説明をしましたが、GitHub関連以外のチャンネルは無理して利用しなくて大丈夫です。
 ただ、分からなくて何もしなかった / 出来なかったよりかは誰かに聞いた方が良いので、分からなくて少しでもコーディングに詰まったら誰かに聞きましょう。
 discord上で聞いて答えが返ってこなかったらそれはチームの責任なので、自分が分かることは積極的に教えてあげてください。
+ 
