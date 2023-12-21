@@ -7,9 +7,13 @@ class PostProcessing:
             self.image = None
         else:
             self.image = cv2.imread(imagePath)
-        self.funcList = []  # 画像処理の関数を格納するリスト
+        self.funcList = [self.__sampleFunc(),]  # 画像処理の関数を格納するリスト
 
     # 画像処理の関数を追加する
+        
+    # サンプル関数
+    def __sampleFunc(self):
+        print("sampleFunc、ファンクリストから呼び出されました。")
 
     def run(self):
         for func in self.funcList:
