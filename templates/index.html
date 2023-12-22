@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>課題11のHTML</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>課題11のHTML</title>
 
-    <!-- new.css -->
-    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+        <!-- new.css -->
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
 
-    <script defer src="{{ url_for('static', filename='upload.js') }}"></script>
-</head>
+        <script defer src="{{ url_for('static', filename='upload.js') }}"></script>
+    </head>
 
-<body>
-    <h1>
-        中身は空です
-    </h1>
-</body>
+    <body>
+        <h1>
+            Helo World!
+        </h1>
+        <h2>
+            <a href="/show">画像を見る</a>
+        </h2>
+        <form method="post" action="/upload">
+            <input type="file" name="uploadFile" id="uploadFile">
+            <input type="submit" id="fileSubmit"></input>
+        </form>
+
+        <!-- メッセージの表示領域 （サンプルでは使いません。課題のタイミングで使用してもOKです。） -->
+        <div id="message-container" role="alert" style="display: none;"></div>
+        <div id="error-container" role="alert" style="display: none;"></div>
+    </body>
 
 </html>
