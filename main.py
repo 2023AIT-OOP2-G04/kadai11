@@ -49,13 +49,13 @@ def upload_file():
 @app.route("/show", methods=["GET"])
 def show():
     # uploadフォルダとprocessedフォルダの画像を表示
-    uploadPath = "static/upload"
+    uploadPath = "static/img/upload"
     uploadFiles = [
         f for f in os.listdir(uploadPath) if os.path.isfile(os.path.join(uploadPath, f))
     ] 
     print(uploadFiles)
 
-    processedPath = "static/processed"
+    processedPath = "static/img/processed"
     processedFiles = [
         f for f in os.listdir(processedPath) if os.path.isfile(os.path.join(processedPath, f))
     ] 
