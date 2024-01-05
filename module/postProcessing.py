@@ -1,14 +1,29 @@
 import cv2
+from flask import app
 import numpy as np
 import os
 
 class PostProcessing:
-    def __init__(self, imagePath:str=""):
+    def __init__(self, imagePath: str = ""):
         if imagePath == "":
             self.image = None
         else:
             self.image = cv2.imread(imagePath)
-        self.funcList = [self.__sampleFunc(), self.facewaku(), self.faceMosaic()]  # 画像処理の関数を格納するリスト
+        self.funcList = [self.__sampleFunc, self.facewaku, self.faceMosaic,self.cannyFilter]  # 画像処理の関数を格納するリスト
+    # 画像処理の関数を追加する
+    def cannyFilter(self):
+        # グレースケール変換
+        gray_image = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+
+        # ノイズ除去
+        blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+
+        # Cannyエッジ検出
+        edges = cv2.Canny(blurred_image, 50, 150)
+        self.cannyImage = edges
+
+        # 出力画像の保存
+        self.writeImage(edges, "output")
 
     # サンプル関数
     def __sampleFunc(self):
@@ -18,7 +33,7 @@ class PostProcessing:
         for func in self.funcList:
             image = func()
             self.writeImage(image)
-        return 
+        return
 
     # ここに画像処理の関数を書く
     # 顔検出して枠で囲う関数
@@ -71,7 +86,7 @@ class PostProcessing:
         #出力
         self.writeImage(self.image,"mosaic")
 
-    def readImage(self, imagePath:str=""):
+    def readImage(self, imagePath: str = ""):
         if imagePath == "":
             return
         self.image = cv2.imread(imagePath)
@@ -84,18 +99,17 @@ class PostProcessing:
         cv2.imshow("Image", image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-    
+
     def writeImage(self, image=None, outputName=""):
         if image is None:
             return
         outputPath = "./static/img/processed/" + outputName + ".jpg"
         cv2.imwrite(outputPath, image)
 
+
 if __name__ == "__main__":
     # ここでデバッグする
+
     # 以下のようにデバッグする
     imagePath = "./static/img/test/test.jpg"
     postProcessing = PostProcessing(imagePath)
-    postProcessing.faceMosaic(postProcessing.image)
-    #postProcessing.showImage(postProcessing.image)
-    #postProcessing.writeImage(postProcessing.image, "test")
